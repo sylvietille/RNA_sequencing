@@ -55,3 +55,38 @@ samtools view -bS SRR7821953.sam > SRR7821953.bam
 samtools view -bS SRR7821968.sam > SRR7821968.bam
 samtools view -bS SRR7821969.sam > SRR7821969.bam
 samtools view -bS SRR7821970.sam > SRR7821970.bam
+
+#!/bin/bash
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=8000M
+#SBATCH --time=03:00:00
+#SBATCH --job-name=index_sorted_bam
+#SBATCH --mail-user=sylvie.tille@students.unibe.ch
+#SBATCH --mail-type=begin,end
+
+
+
+source /data/users/lfalquet/SBC07107_21/scripts/module.sh
+
+
+samtools index SRR7821918_sorted.bam
+samtools index SRR7821919_sorted.bam
+samtools index SRR7821920_sorted.bam
+samtools index SRR7821921_sorted.bam
+samtools index SRR7821922_sorted.bam
+samtools index SRR7821937_sorted.bam
+samtools index SRR7821938_sorted.bam
+samtools index SRR7821939_sorted.bam
+samtools index SRR7821949_sorted.bam
+samtools index SRR7821950_sorted.bam
+samtools index SRR7821951_sorted.bam
+samtools index SRR7821952_sorted.bam
+samtools index SRR7821953_sorted.bam
+samtools index SRR7821968_sorted.bam
+samtools index SRR7821969_sorted.bam
+samtools index SRR7821970_sorted.bam
+
+
+
+
+
