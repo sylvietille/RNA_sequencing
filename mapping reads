@@ -1,1 +1,57 @@
+#!/bin/bash
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=8000M
+#SBATCH --time=03:00:00
+#SBATCH --job-name=index
+#SBATCH --mail-user=sylvie.tille@students.unibe.ch
+#SBATCH --mail-type=begin,end
 
+
+#index to the reference
+module add UHTS/Aligner/hisat/2.2.1
+
+hisat2-build /data/courses/rnaseq/toxoplasma_de/stille_workspace/hisat/*.fastq.gz /data/courses/rnaseq/toxoplasma_de/genome/Mus_musculus.GRCm39.dna.primary_assembly.fa
+
+
+#!/bin/bash
+#SBATCH --cpus-per-task=4
+#SBATCH --mem-per-cpu=8000M
+#SBATCH --time=09:00:00
+#SBATCH --job-name=align
+#SBATCH --mail-user=sylvie.tille@students.unibe.ch
+#SBATCH --mail-type=begin,end
+
+
+module add UHTS/Aligner/hisat/2.2.1
+
+hisat2 -q -x Mus_musculus.GRCm39 -1 SRR7821953_1.fastq -2 SRR7821953_2.fastq -S SRR7821953.sam
+hisat2 -q -x Mus_musculus.GRCm39 -1 SRR7821968_1.fastq -2 SRR7821968_2.fastq -S SRR7821968.sam
+hisat2 -q -x Mus_musculus.GRCm39 -1 SRR7821969_1.fastq -2 SRR7821969_2.fastq -S SRR7821969.sam
+hisat2 -q -x Mus_musculus.GRCm39 -1 SRR7821970_1.fastq -2 SRR7821970_2.fastq -S SRR7821970.sam
+
+
+
+
+#!/bin/bash
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=8000M
+#SBATCH --time=03:00:00
+#SBATCH --job-name=index
+#SBATCH --mail-user=sylvie.tille@students.unibe.ch
+#SBATCH --mail-type=begin,end
+
+samtools view -bS SRR7821919.sam > SRR7821919.bam
+samtools view -bS SRR7821920.sam > SRR7821920.bam
+samtools view -bS SRR7821921.sam > SRR7821921.bam
+samtools view -bS SRR7821922.sam > SRR7821922.bam
+samtools view -bS SRR7821937.sam > SRR7821937.bam
+samtools view -bS SRR7821938.sam > SRR7821938.bam
+samtools view -bS SRR7821939.sam > SRR7821939.bam
+samtools view -bS SRR7821949.sam > SRR7821949.bam
+samtools view -bS SRR7821950.sam > SRR7821950.bam
+samtools view -bS SRR7821951.sam > SRR7821951.bam
+samtools view -bS SRR7821952.sam > SRR7821952.bam
+samtools view -bS SRR7821953.sam > SRR7821953.bam
+samtools view -bS SRR7821968.sam > SRR7821968.bam
+samtools view -bS SRR7821969.sam > SRR7821969.bam
+samtools view -bS SRR7821970.sam > SRR7821970.bam
