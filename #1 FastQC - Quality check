@@ -3,7 +3,6 @@
 #SBATCH --mem-per-cpu=8000M
 #SBATCH --time=03:00:00
 #SBATCH --job-name=index
-#SBATCH --mail-user=sylvie.tille@students.unibe.ch
 #SBATCH --mail-type=begin,end
 #SBATCH --output=/data/courses/rnaseq/toxoplasma_de/stille_workspace/index/outputs_errors/output_%j.o
 #SBATCH --error=/data/courses/rnaseq/toxoplasma_de/stille_workspace/index/outputs_errors/error_%j.e
