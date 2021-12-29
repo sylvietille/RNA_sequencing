@@ -1,10 +1,13 @@
+#step 5 & 6 
 library("DESeq2")
 #import the count table 
 counts<- read.table("Count.txt", header=T)
 
 #remove the uninteresting column 
 counts_matrix <- counts[, -c(2, 3, 4, 5, 6)]
+rownames(counts_matrix)<-counts_matrix[,1]
 counts_matrix<-counts_matrix[,-1]
+
 
 #create coldata
 sample <- colnames(counts_matrix)
@@ -50,3 +53,11 @@ up_lung<- subset(R_lung, log2FoldChange > 0)
 #1887
 downlung <- subset(R_lung, log2FoldChange < 0)
 #3115
+
+
+#plot count and counts 
+c<-counts(dds); c
+#ENSMUSG00000061024
+pdf("countplot.pdf")
+plotCounts(dds, gene = "ENSMUSG00000061024", intgroup = c("tissue", "condition"))
+dev.off()
