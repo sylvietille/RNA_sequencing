@@ -1,1 +1,27 @@
+library("clusterProfiler")
+library("org.Mm.eg.db")
+library("enrichplot")
 
+# for blood
+ego <- enrichGO(gene          = row.names(R_blood),
+                universe      = row.names(blood_result),
+                OrgDb         = org.Mm.eg.db,
+                ont           = "CC",
+                keyType= "ENSEMBL")
+
+pdf("egoblood.pdf")
+dotplot(ego, showCategory=20)
+goplot(ego)
+dev.off()
+
+#for lung
+ego <- enrichGO(gene          = row.names(R_lung),
+                universe      = row.names(lung_result),
+                OrgDb         = org.Mm.eg.db,
+                ont           = "CC",
+                keyType= "ENSEMBL")
+
+pdf("egolung.pdf")
+dotplot(ego, showCategory=20)
+goplot(ego)
+dev.off()
