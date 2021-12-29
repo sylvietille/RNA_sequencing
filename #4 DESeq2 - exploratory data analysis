@@ -1,1 +1,52 @@
+library("DESeq2")
+#import the count table 
+counts<- read.table("Count.txt", header=T)
 
+#remove the uninteresting column 
+counts_matrix <- counts[, -c(2, 3, 4, 5, 6)]
+counts_matrix<-counts_matrix[,-1]
+
+#create coldata
+sample <- colnames(counts_matrix)
+condition<-c("case","case","case","case","case","control","control","control",
+             "case","case","case","case","case","control","control","control")
+tissue<- c("lung","lung","lung","lung","lung","lung","lung","lung",
+           "blood","blood","blood","blood","blood","blood","blood","blood")
+coldata<-cbind(sample,condition,tissue)
+rownames(coldata)<-coldata[,1]
+coldata <- coldata[,-1]
+
+# build the dds
+dds<- DESeqDataSetFromMatrix(countData = counts_matrix, colData = coldata, design= ~condition + tissue)
+#error output 
+dds<-DESeq(dds)
+#Remove the dependence of the variance on the mean
+vst<-vst(dds, blind = T)
+#plot the PCA
+pdf("Rplot.pdf")
+print(plotPCA(vst,intgroup=c("condition","tissue")))
+dev.off()
+
+#changing dds for results 
+dds$group<-factor(paste0(dds$condition,dds$tissue))
+design(dds)<- ~ group
+dds<- DESeq(dds)
+
+resultsNames(dds)
+
+#results 
+
+blood_result<- results(dds, contrast=c("group", "caseblood","controlblood"))
+R_blood<- blood_result[!is.na(blood_result$padj) & blood_result$padj < 0.05 & abs(blood_result$log2FoldChange)>1,]
+#8032
+up_blood<- subset(R_blood, log2FoldChange > 0)
+#2157
+down_blood <- subset(R_blood, log2FoldChange < 0)
+#5875
+lung_result<- results(dds, contrast=c("group", "caselung","controllung"))
+R_lung<- lung_result[!is.na(lung_result$padj) & lung_result$padj < 0.05 & abs(lung_result$log2FoldChange)>1,]
+#5002
+up_lung<- subset(R_lung, log2FoldChange > 0)
+#1887
+downlung <- subset(R_lung, log2FoldChange < 0)
+#3115
