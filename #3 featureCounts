@@ -10,4 +10,5 @@
 
 module add UHTS/Analysis/subread/2.0.1
 
-featureCounts -t exon -g gene_id -a Mus_musculus.GRCm39.104.gtf -o counts.txt *_sorted.bam
+featureCounts -p -s 2 -a Mus_musculus.GRCm39.104.gtf -o Count.txt *_sorted.bam
+
