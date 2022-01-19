@@ -40,6 +40,8 @@ hisat2 -q -x Mus_musculus.GRCm39 -1 SRR7821970_1.fastq -2 SRR7821970_2.fastq -S 
 #SBATCH --mail-user=sylvie.tille@students.unibe.ch
 #SBATCH --mail-type=begin,end
 
+module add UHTS/Analysis/samtools/1.10
+
 samtools view -bS SRR7821919.sam > SRR7821919.bam
 samtools view -bS SRR7821920.sam > SRR7821920.bam
 samtools view -bS SRR7821921.sam > SRR7821921.bam
@@ -65,7 +67,7 @@ samtools view -bS SRR7821970.sam > SRR7821970.bam
 #SBATCH --mail-type=begin,end
 
 
-source /data/users/lfalquet/SBC07107_21/scripts/module.sh
+module add UHTS/Analysis/samtools/1.10
 
 
 samtools sort SRR7821918.sam -o SRR7821918_sorted.bam
@@ -96,7 +98,7 @@ samtools sort SRR7821970.sam -o SRR7821970_sorted.bam
 
 
 
-source /data/users/lfalquet/SBC07107_21/scripts/module.sh
+module add UHTS/Analysis/samtools/1.10
 
 
 samtools index SRR7821918_sorted.bam
