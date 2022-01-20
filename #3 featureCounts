@@ -3,8 +3,6 @@
 #SBATCH --mem-per-cpu=8000M
 #SBATCH --time=03:00:00
 #SBATCH --job-name=featurecounts
-#SBATCH --mail-user=sylvie.tille@students.unibe.ch
-#SBATCH --mail-type=begin,end
 
 
 
