@@ -57,7 +57,6 @@ downlung <- subset(R_lung, log2FoldChange < 0)
 
 #plot count and counts 
 c<-counts(dds); c
-#ENSMUSG00000061024
 pdf("countplot.pdf")
 plotCounts(dds, gene = "ENSMUSG00000025929", intgroup = c("tissue", "condition"))
 plotCounts(dds, gene = "ENSMUSG00000034459", intgroup = c("tissue", "condition"))
